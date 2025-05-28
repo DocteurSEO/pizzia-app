@@ -1,6 +1,7 @@
 {
   "devDependencies": {
     "@cypress/code-coverage": "^3.14.4",
+    "babel-plugin-istanbul": "^7.0.0",
     "cypress": "^14.4.0",
     "istanbul-lib-coverage": "^3.2.2",
     "mochawesome": "^7.1.3",
