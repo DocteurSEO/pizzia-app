@@ -1,0 +1,20 @@
+services:
+  pizzapi:
+    container_name: pizzapi-container
+    build:
+      context: ./pizzapi
+      dockerfile: Dockerfile
+    volumes:
+      - ./pizzapi:/app
+    ports:
+      - 3000:3000
+
+  pizzapp:
+    container_name: pizzapp-container
+    build:
+      context: ./pizzapp
+      dockerfile: Dockerfile
+    volumes:
+      - ./pizzapp:/app
+    ports:
+      - 80:3000
