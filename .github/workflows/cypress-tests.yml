@@ -15,6 +15,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       # Install npm dependencies, cache them correctly
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
       # and run all Cypress tests
       - name: Cypress run in ${{ matrix.browsers }}
         uses: cypress-io/github-action@v6
@@ -34,11 +39,10 @@ jobs:
             name: Cypress HTML Report ${{ matrix.browsers }}
             path: cypress/reports/${{ matrix.browsers }}
 
-      # Nouvelle étape : Vérification du coverage
       - name: Check Code Coverage
         run: |
           if [ ! -f "coverage/coverage-summary.json" ]; then
-            echo "❌ Fichier de coverage non trouvé. Assurez-vous que Cypress génère le coverage."
+            echo "❌ Fichier de coverage non trouvé."
             exit 1
           fi
           
