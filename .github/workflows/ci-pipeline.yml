@@ -1,10 +1,8 @@
 name: CI Pipeline
 
 on:
-  workflow_run:
-    workflows: ["Cypress Tests"]
-    types: [completed]
-    branches: [ "feature/cicd" ]
+    push:
+      branches: [ "feature/cicd" ]
 
 jobs:
   cypress-run:
@@ -35,7 +33,6 @@ jobs:
         with:
             name: Cypress HTML Report ${{ matrix.browsers }}
             path: cypress/reports/${{ matrix.browsers }}
-
 
   build:
     runs-on: ubuntu-latest
