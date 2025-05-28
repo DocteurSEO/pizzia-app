@@ -34,7 +34,8 @@ jobs:
             name: Cypress HTML Report ${{ matrix.browsers }}
             path: cypress/reports/${{ matrix.browsers }}
 
-  build:
+  docker-build:
+    needs: cypress-run
     runs-on: ubuntu-latest
     
     steps:
