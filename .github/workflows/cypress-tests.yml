@@ -50,9 +50,3 @@ jobs:
           else
             echo "✅ Code coverage OK: $coverage% (≥ 80%)"
           fi
-
-      - name: Upload HTML Reports
-        uses: actions/upload-artifact@v4
-        with:
-            name: Cypress HTML Report ${{ matrix.browsers }}
-            path: cypress/reports/${{ matrix.browsers }}
