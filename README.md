@@ -5,7 +5,7 @@ c'est ici que commence votre aventure. Je sais que vous êtes impatients de touc
 - [Quick start](#quick-start)
 - [Dev notice](#dev-notice)
 - [Contribute to this project](#contribute-to-this-project)
-- [HELP I'M LOST !!!](#help-im-lost)
+- [HELP I'M LOST](#help-im-lost)
 ## Quick start
 Voici la liste des étapes à effectuer pour fiare tourner ce projet sur votre machine :
 1) Installez docker sur votre machine depuis le site officiel https://www.docker.com/
@@ -71,5 +71,5 @@ Une fois sur de vos modifications, créez une merge request pour la fonctionalit
 \
 *ps: Je n'ai aucun problème avec l'utilisation des IA mais votre code doit rester lisible, maintenable, et vous devriez être en capacité d'expliquer les décisions d'implémentations que vous prenez lors, de par exemple, une code review avec un @TechLead*
 
-## HELP I'M LOST !!!
+## HELP I'M LOST
 En cas de problème, n'hésitze pas à envoyer un message sur Teams à `@Faraan Rozbully`. Ne paniquez pas et commandez une pizza (sans Ananas) à la pizzeria la plus proche le temps de patienter.
