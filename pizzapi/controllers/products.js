@@ -27,5 +27,32 @@ const getProducts = (req, res) => {
     });
 }
 
+const createProduct = (req, res) => {
+  const newProduct = req.body;
 
-module.exports = { getProducts }
+  if (!newProduct.name || !newProduct.price) {
+    return res.status(400).json({ message: 'Name and price are required' });
+  }
+
+  if (typeof newProduct.price !== 'number') {
+    return res.status(400).json({ message: 'Price must be a number' });
+  }
+
+  if (!newProduct.desc) {
+    newProduct.desc = newProduct.name;
+  }
+
+  products.add(newProduct)
+    .then(doc => {
+      return res.status(201).json({ id: doc.id, ...newProduct });
+    })
+    .catch(error => {
+      return res.status(500).json({ message: {
+        error: 'Error creating product',
+        details: error.message
+      }});
+    });
+}
+
+
+module.exports = { getProducts, createProduct };
