@@ -1,17 +1,12 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import Link from 'next/link';
+import Navbar from "./components/navbar";
 
 export default function Home() {
   return (
     <div className={styles.container}>
-      <div className={styles.nav}>
-        <div className={styles.nav_item}><Image src="/features/logo_pizzia.png" alt="logo" width={70} height={70} /></div>
-        <div className={styles.nav_item}>ACCEUIL</div>
-        <div className={styles.nav_item}>OFFRES</div>
-        <div className={styles.nav_item}>COMMANDES</div>
-        <Link href="/login" className={`${styles.nav_item} ${styles.link_login}`}>CONNEXION</Link>
-      </div>
+     <Navbar />
 
        <div className={styles.container_two}>
         <div className={styles.blocs}>
