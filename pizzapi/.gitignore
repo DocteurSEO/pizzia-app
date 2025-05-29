@@ -70,3 +70,4 @@ node_modules/
 
 # credentials
 config/credentials.json
+config/firebase-client-config.json	

@@ -3,8 +3,12 @@ const app = express();
 const port = 3001;
 
 const cors = require('cors');
+const cookie_session = require('cookie-session');
 app.use(express.json());
 app.use(cors());
+app.use(cookie_session({
+  keys: ["myVerySecretKey"]
+}));
 
 app.get('/', (req, res) => {
   res.send('Welcome on PizzAi API!')
@@ -12,6 +16,7 @@ app.get('/', (req, res) => {
 
 //routers
 app.use('/products', require('./routers/products'));
+app.use('/auth', require('./routers/auth'));
 
 app.listen(port, () => {
   console.log(`Pizzapi app listening on port ${port}`);
