@@ -1,12 +1,19 @@
-const express = require('express')
-const app = express()
-const port = 3001
-const db = require('./config/firebase').db;
+const express = require('express');
+const app = express();
+const port = 3001;
+
+const cors = require('cors');
+app.use(express.json());
+app.use(cors());
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send('Welcome on PizzAi API!')
 })
 
+//routers
+app.use('/products', require('./routers/products'));
+
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`Pizzapi app listening on port ${port}`);
 })
+
