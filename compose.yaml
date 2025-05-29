@@ -4,8 +4,6 @@ services:
     build:
       context: ./pizzapi
       dockerfile: Dockerfile
-    volumes:
-      - ./pizzapi:/app
     ports:
       - 3001:3001
 
@@ -14,7 +12,5 @@ services:
     build:
       context: ./pizzapp
       dockerfile: Dockerfile
-    volumes:
-      - ./pizzapp:/app
     ports:
       - 80:3000
