@@ -83,11 +83,7 @@ const updateProduct = (req, res) => {
   const productId = req.params.id;
   const updatedData = req.body;
 
-  if (!updatedData.name || !updatedData.price) {
-    return res.status(400).json({ message: 'Name and price are required' });
-  }
-
-  if (typeof updatedData.price !== 'number') {
+  if (updatedData.price && typeof updatedData.price != 'number') {
     return res.status(400).json({ message: 'Price must be a number' });
   }
 
