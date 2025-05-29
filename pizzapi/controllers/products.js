@@ -1,31 +1,31 @@
 const db = require('../config/firebase').db;
 
-const pizzasRef = db.collection('pizzas');
+const products = db.collection('pizzas');
 
-const getPizzas = (req, res) => {
-  pizzasRef.get()
+const getProducts = (req, res) => {
+  products.get()
     .then(snapshot => {
       if (snapshot.empty) {
-        return res.status(404).json({ message: 'No pizzas found' });
+        return res.status(404).json({ message: 'No products found' });
       }
 
-      const pizzas = [];
+      const products = [];
       snapshot.forEach(doc => {
-        pizzas.push({
+        products.push({
           id: doc.id,
           ...doc.data()
         });
       });
 
-      return res.status(200).json(pizzas);
+      return res.status(200).json(products);
     })
     .catch(error => {
       return res.status(500).json({ message: {
-        error: 'Error retrieving pizzas',
+        error: 'Error retrieving products',
         details: error.message
       }});
     });
 }
 
 
-module.exports = { getPizzas }
+module.exports = { getProducts }
