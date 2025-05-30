@@ -16,6 +16,7 @@ app.get('/', (req, res) => {
 
 //routers
 app.use('/products', require('./routers/products'));
+app.use('/orders', require('./routers/orders'));
 app.use('/auth', require('./routers/auth'));
 
 app.listen(port, () => {
