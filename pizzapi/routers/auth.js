@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.post('/register', authRegister);
 router.post('/login', authLogin);
-router.delete('/login', authLogout);
+router.post('/logout', authLogout);
 router.get('/profile', authProfile);
 
 module.exports = router;
