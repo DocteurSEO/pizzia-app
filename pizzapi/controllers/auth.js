@@ -27,7 +27,7 @@ const authRegister = (req, res) => {
     usersDatabase.doc(userRecord.uid).set(userInformations)
     .then(() => {
       console.log('Successfully created new user:', userRecord.uid);
-      return res.status(201).send(userRecord);
+      return res.status(201).send(userInformations);
     })
   })
   .catch((error) => {
