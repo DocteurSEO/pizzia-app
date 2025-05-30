@@ -1,34 +1,35 @@
 it('Connexion avec un utilisateur valide', () => {
-    cy.visit(baseUrl)
-    cy.contains('label', 'Email').should('be.visible').type(user)
-    cy.contains('label', 'Password').should('be.visible').type(mdp)
-    cy.get('button').should('contains.text', 'Connexion').click({force})
+    cy.visit("http://localhost:3000/login")
+    cy.get('input[placeholder="Adresse email"]').type("Test.cypress@gmail.com")
+    cy.get('input[placeholder="Mot de passe"]').type('Test123')
+    cy.get('.page-module__X_Z_4a__btn_connexion').contains('Connexion').click({force:true})
 })
 
 it('Connexion avec un mauvais utilisateur et un bon mdp', () => {
-    cy.visit(baseUrl)
-    cy.contains('label', 'Email').should('be.visible').type(fakeuser)
-    cy.contains('label', 'Password').should('be.visible').type(mdp)
-    cy.get('button').should('contains.text', 'Connexion').click({force})
+    cy.visit("http://localhost:3000/login")
+    cy.get('input[placeholder="Adresse email"]').type("Testfake.cypress@gmail.com")
+    cy.get('input[placeholder="Mot de passe"]').type("Test123")
+    cy.get('.page-module__X_Z_4a__btn_connexion').contains('Connexion').click({force:true})
 })
 
 it('Connexion avec un mauvais mdp mais bon utilisateur', () => {
-    cy.visit(baseUrl)
-    cy.contains('label', 'Email').should('be.visible').type(user)
-    cy.contains('label', 'Password').should('be.visible').type(fakemdp)
-    cy.get('button').should('contains.text', 'Connexion').click({force})
+    cy.visit("http://localhost:3000/login")
+    cy.get('input[placeholder="Adresse email"]').type("Test.cypress@gmail.com")
+    cy.get('input[placeholder="Mot de passe"]').type("Test1234")
+    cy.get('.page-module__X_Z_4a__btn_connexion').contains('Connexion').click({force:true})
 })
 
 it('Inscription', ()=>{
-    cy.visit(baseUrl)
-    cy.get('button').should('contains.text', 'Inscription')
-    cy.contains('label', 'Email').should('be.visible').type(inscription)
-    cy.contains('label', 'Password').should('be.visible').type(mdp2)
-    cy.get('button').should('contains.text', 'Inscrit toi').click({force})
+    cy.visit("http://localhost:3000/login")
+    cy.get('.page-module__X_Z_4a__btn_inscription').contains('Inscription').click({force:true})
+    cy.wait(1000)
+    cy.get('input[placeholder="Adresse email"]').type("register.cypress@gmail.com")
+    cy.get('input[placeholder="Mot de passe"]').type("Test12345")
+    cy.get('.page-module__IMkl-G__button_inscription').contains('INSCRIPTION').click({force:true})
 })
 
 it('Affichage de la composition des pizzas', ()=>{
-    cy.visit(baseUrl)
+    cy.visit("http://localhost:3000")
     //ajouter une rechercher si besoin pour tomber sur une pizza
     cy.contains('desc').should('exist')
 
