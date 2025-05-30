@@ -1,0 +1,10 @@
+{
+  "UrlLogin":"http://localhost:3000/login",
+  "email": "register.cypress@gmail.com",
+  "firstName" : "Test",
+  "lastName": "Cypress",
+  "mdp": "Test12345",
+  "validateMdp" :"Test12345",
+  "validateFakeMdp":"Test123456"
+
+}
