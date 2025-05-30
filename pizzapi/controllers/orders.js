@@ -1,4 +1,5 @@
-const { getProductById } = require('./products');
+const { getProducts } = require('../helpers/products/getProducts');
+const { getUser } = require('../helpers/users/getUser');
 
 const db = require('../config/firebase').db;
 
@@ -52,24 +53,23 @@ const getOrderById = (req, res) => {
     });
 }
 
-// to clean up the code, we can use async/await for better readability
 const createOrder = async (req, res) => {
   try {
-    const orders = db.collection('orders');
     const newOrder = req.body;
+
     newOrder.dateOrder = new Date().toISOString();
-    const userSnap = await db.collection('users').doc(req.body.userID).get();
-    const userData = { id: userSnap.id, ...userSnap.data() };
-    const pizzaSnapshots = await Promise.all(
-      req.body.pizzaIDs.map(id => db.collection('pizzas').doc(id).get())
-    );
-    const pizzaData = pizzaSnapshots.map(doc => ({ id: doc.id, ...doc.data() }));
+
+    const userData = await getUser(req.body.userID);
+    const pizzaData = await getProducts(req.body.pizzaIDs);
+
     newOrder.userID = userData;
     newOrder.pizzaIDs = pizzaData;
+
     const docRef = await orders.add(newOrder);
+
     return res.status(201).json({ id: docRef.id, ...newOrder });
+
   } catch (error) {
-    console.error('Error creating order:', error);
     return res.status(500).json({
       message: {
         error: 'Error creating order',
@@ -79,7 +79,6 @@ const createOrder = async (req, res) => {
   }
 };
 
-// clean
 const updateOrder = (req, res) => {
   const orderID = req.params.id;
   const updatedData = req.body;
