@@ -11,6 +11,7 @@ export default function Navbar() {
         <div className={styles.nav_item}>OFFRES</div>
         <Link href="/commands" className={`${styles.nav_item} ${styles.link_commands}`}>COMMANDES</Link>
         <Link href="/login" className={`${styles.nav_item} ${styles.link_login}`}>CONNEXION</Link>
+        <Link href='/profile' className={styles.nav_item}>PROFILE</Link>
     </nav>
   );
 }
