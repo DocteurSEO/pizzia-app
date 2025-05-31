@@ -11,6 +11,7 @@ export default function Login() {
   const router = useRouter();
 
   const handleLogin = async (e) => {
+    e.preventDefault();
     try {
       const res = await fetch('http://localhost:3001/auth/login', {
         method: 'POST',
@@ -18,9 +19,9 @@ export default function Login() {
         body: JSON.stringify({ email, password }),
       });
 
-      const data = await res.json();
+      const data = await res.status;
 
-      if (!res.ok) {
+      if (res.status!=200) {
         alert(data.details || "Erreur lors de la connexion");
         return;
       }
