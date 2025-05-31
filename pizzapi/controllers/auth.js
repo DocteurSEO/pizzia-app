@@ -1,9 +1,13 @@
-const { auth } = require('../config/firebase')
+const { auth, db } = require('../config/firebase')
 const { authClient } = require('../config/firebase-client')
 const { signInWithEmailAndPassword } = require('firebase/auth')
 
+const usersDatabase = db.collection('users')
+const tokenTimeToLive = 60 * 60 * 24 * 5 * 1000;
+
 const authRegister = (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, firstName, lastName } = req.body;
+
   if (!email || !password) return res.status(400).json({
     error: 'Bad request',
     details: 'Missing email or password'
@@ -14,11 +18,21 @@ const authRegister = (req, res) => {
     password: password,
   })
   .then((userRecord) => {
-    console.log('Successfully created new user:', userRecord.uid);
-    return res.sendStatus(201)
+    let userInformations = {
+      uid: userRecord.uid,
+      email: email,
+      firstName: firstName || '',
+      lastName: lastName || ''
+    };
+    usersDatabase.doc(userRecord.uid).set(userInformations)
+    .then(() => {
+      console.log('Successfully created new user:', userRecord.uid);
+      return res.status(201).send(userInformations);
+    })
   })
   .catch((error) => {
-    let { code, message } = error.errorInfo
+    if (!error?.errorInfo) return res.send(error);
+    const { code, message } = error.errorInfo;
 
     if (code == 'auth/email-already-exists') return res.status(409).json({
       error: code,
@@ -47,11 +61,9 @@ const authLogin = (req, res) => {
   
   signInWithEmailAndPassword(authClient, email, password)
   .then((userCredential) => {
-    const user = userCredential.user;
-    user.getIdToken()
+    userCredential.user.getIdToken()
     .then((idToken)=>{
-      const expiresIn = 60 * 60 * 24 * 5 * 1000;
-      auth.createSessionCookie(idToken, { expiresIn })
+      auth.createSessionCookie(idToken, { expiresIn: tokenTimeToLive })
       .then(
         (sessionCookie) => {
           req.session.firebaseToken = sessionCookie;
@@ -72,7 +84,10 @@ const authLogin = (req, res) => {
 const authProfile = (req, res) => {
   verifyAuth(req.session)
   .then((decodedClaims) => {
-    return res.send(decodedClaims);
+    usersDatabase.doc(decodedClaims.uid).get()
+    .then((document) => {
+      return res.json({...document.data()});
+    })
   })
   .catch((error) => {
     return res.status(403).json(error);
@@ -107,4 +122,4 @@ const verifyAuth = (session) => {
   })
 }
 
-module.exports = { authRegister, authLogin , authProfile, authLogout, verifyAuth}
+module.exports = { authRegister, authLogin , authProfile, authLogout, verifyAuth }
