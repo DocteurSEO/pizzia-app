@@ -6,6 +6,7 @@ export default function CardProduct({ product }) {
             <h3>{product.name}</h3>
             <p>{product.description}</p>
             <p><strong>{product.price} €</strong></p>
+            <button className={styles.addToCartButton}>Ajouter au panier</button>
         </div>
     );
 }
