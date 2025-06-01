@@ -2,7 +2,9 @@ name: CI Pipeline
 
 on:
     push:
-      branches: [ "develop, feature/cicd"]
+      branches:
+      - develop
+      - feature/cicd
 
 jobs:
   cypress-run:
