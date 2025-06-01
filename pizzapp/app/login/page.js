@@ -27,6 +27,7 @@ export default function Login() {
         return;
       }
 
+      localStorage.setItem('isLoggedIn', 'true');
       alert('Connexion réussi');
       router.push('/home')
     } catch (error) {
