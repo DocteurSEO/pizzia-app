@@ -27,12 +27,29 @@ export default function Commands() {
     return (
         <div>
             <Navbar />
-            <h1>Liste des produits</h1>
-            <div className={styles.contain_cards}>
-                {products.map(product => (
-                    <CardProduct key={product.id} product={product} />
-                ))}
+            <div className={styles.contain_one}>
+                <div className={styles.container_name}>
+                    <p>AFFICHAGE EN ATTENTE D'IDEE</p>
+                </div>
             </div>
+
+            <div className={styles.contain_two}>
+                <div className={styles.test}>
+                    <div className={styles.contain_cards}>
+                        {products.map(product => (
+                            <CardProduct key={product.id} product={product} />
+                        ))}
+                    </div>
+                </div>
+
+                <div className={styles.myCard}>
+                    <div className={styles.cartTitle}>
+                        <h1>Mon panier</h1>
+                    </div>
+
+                </div>
+            </div>
+
         </div>
     )
 }
