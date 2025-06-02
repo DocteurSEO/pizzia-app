@@ -6,9 +6,15 @@ const cors = require('cors');
 const cookie_session = require('cookie-session');
 const logBeforeAndAfter = require('./middlewares/log-before-and-after');
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  'origin': 'http://localhost:3000',
+  'credentials': true,
+}));
 app.use(cookie_session({
-  keys: ["myVerySecretKey"]
+  'keys': ["myVerySecretKey"],
+  'secure': false,
+  'httpOnly': true,
+  'name': 'pizzapiSession'
 }));
 app.use(logBeforeAndAfter);
 
