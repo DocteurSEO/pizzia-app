@@ -6,6 +6,15 @@ services:
       dockerfile: Dockerfile
     ports:
       - 3001:3001
+    volumes:
+      - ./pizzapi:/app
+    develop:
+      watch:
+        - action: sync
+          path: ./pizzapi
+          target: /app
+          ignore:
+            - node_modules/
 
   pizzapp:
     container_name: pizzapp-container
@@ -14,3 +23,14 @@ services:
       dockerfile: Dockerfile
     ports:
       - 80:3000
+    volumes:
+      - ./pizzapp:/app
+     
+    develop:
+      watch:
+        - action: sync
+          path: ./pizzapp
+          target: /app
+          ignore:
+            - node_modules/
+            - .next/
