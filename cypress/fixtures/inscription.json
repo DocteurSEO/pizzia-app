@@ -1,6 +1,6 @@
 {
   "UrlLogin":"http://localhost:3000/login",
-  "email": "register.cypress@gmail.com",
+  "email": "register2.cypress@gmail.com",
   "firstName" : "Test",
   "lastName": "Cypress",
   "mdp": "Test12345",
