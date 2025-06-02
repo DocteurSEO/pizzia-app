@@ -15,8 +15,7 @@ const authRegister = (req, res) => {
 
   auth.createUser({
     email: email,
-    password: password,
-    isAdmin: isAdmin || false,
+    password: password
   })
     .then((userRecord) => {
       let userInformations = {
